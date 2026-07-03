@@ -1,13 +1,275 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  </body>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portafolio Data</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-overlay: rgba(10, 14, 22, 0.72);
+      --card-front: #1f2937;
+      --card-back: #374151;
+      --text-main: #f3f4f6;
+      --text-soft: #d1d5db;
+      --accent: #60a5fa;
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Inter', sans-serif;
+      color: var(--text-main);
+      background:
+        linear-gradient(var(--bg-overlay), var(--bg-overlay)),
+        url("https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=1600&q=80")
+        center/cover fixed no-repeat;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .hero{
+      min-height: 100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding: 2rem;
+    }
+
+    .hero-content{
+      max-width: 900px;
+      backdrop-filter: blur(2px);
+    }
+
+    h1{
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+
+    .subtitle{
+      color: var(--text-soft);
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .scroll-indicator{
+      display:inline-block;
+      margin-top: .6rem;
+      color: var(--accent);
+      font-size: .95rem;
+      animation: float 1.8s ease-in-out infinite;
+    }
+
+    @keyframes float{
+      0%,100%{ transform: translateY(0); opacity: .8; }
+      50%{ transform: translateY(6px); opacity: 1; }
+    }
+
+    .section{
+      padding: 3rem 1.2rem 5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section h2{
+      text-align:center;
+      margin-bottom: 2rem;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 600;
+    }
+
+    .cards-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card-wrap{
+      perspective: 1000px;
+      height: 280px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all .8s ease;
+    }
+
+    .card-wrap.show{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .flip-card{
+      position:relative;
+      width:100%;
+      height:100%;
+      transform-style: preserve-3d;
+      transition: transform .7s ease;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      text-decoration: none;
+      display:block;
+    }
+
+    .card-wrap:hover .flip-card{
+      transform: rotateY(180deg);
+    }
+
+    .card-face{
+      position:absolute;
+      inset:0;
+      border-radius:16px;
+      backface-visibility:hidden;
+      -webkit-backface-visibility:hidden;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding: 1.2rem;
+    }
+
+    .card-front{
+      background: linear-gradient(160deg, #111827, var(--card-front));
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .card-front h3{
+      font-size: 1.35rem;
+      margin-bottom: .6rem;
+    }
+
+    .card-front p{
+      color: var(--text-soft);
+      font-size: .95rem;
+    }
+
+    .card-back{
+      background: linear-gradient(160deg, #1f2937, var(--card-back));
+      border: 1px solid rgba(255,255,255,.12);
+      transform: rotateY(180deg);
+      text-align:center;
+    }
+
+    .card-back h4{
+      margin-bottom: .6rem;
+      font-size: 1.1rem;
+      color: #e5e7eb;
+    }
+
+    .card-back p{
+      font-size: .94rem;
+      color: #d1d5db;
+      line-height: 1.45;
+    }
+
+    footer{
+      text-align:center;
+      padding: 1.2rem;
+      color: #cbd5e1;
+      font-size: .9rem;
+      border-top: 1px solid rgba(255,255,255,.08);
+      background: rgba(15, 23, 42, .35);
+      backdrop-filter: blur(2px);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Portafolio Data</h1>
+      <p class="subtitle">Explora mis entregas y proyectos con enfoque en análisis de datos y desarrollo en la nube.</p>
+      <span class="scroll-indicator">Desliza hacia abajo ↓</span>
+    </div>
+  </header>
+
+  <section class="section">
+    <h2>Tareas</h2>
+    <div class="cards-grid">
+
+      <article class="card-wrap reveal">
+        <a class="flip-card" href="https://lizbeth-mcode.github.io/Portafolio_ZV/Tarea1.html" target="_blank" rel="noopener noreferrer">
+          <div class="card-face card-front">
+            <h3>Tarea 1</h3>
+            <p>Introducción y fundamentos</p>
+          </div>
+          <div class="card-face card-back">
+            <h4>Resumen</h4>
+            <p>Primera práctica con conceptos base del entorno, flujo de trabajo y estructura inicial del proyecto.</p>
+          </div>
+        </a>
+      </article>
+
+      <article class="card-wrap reveal">
+        <a class="flip-card" href="tarea2.html" target="_blank" rel="noopener noreferrer">
+          <div class="card-face card-front">
+            <h3>Tarea 2</h3>
+            <p>Procesamiento de datos</p>
+          </div>
+          <div class="card-face card-back">
+            <h4>Resumen</h4>
+            <p>Limpieza y transformación de datos, aplicando buenas prácticas para preparar información útil y consistente.</p>
+          </div>
+        </a>
+      </article>
+
+      <article class="card-wrap reveal">
+        <a class="flip-card" href="tarea3.html" target="_blank" rel="noopener noreferrer">
+          <div class="card-face card-front">
+            <h3>Tarea 3</h3>
+            <p>Visualización y análisis</p>
+          </div>
+          <div class="card-face card-back">
+            <h4>Resumen</h4>
+            <p>Construcción de gráficas e interpretación de resultados para identificar patrones y apoyar decisiones.</p>
+          </div>
+        </a>
+      </article>
+
+      <article class="card-wrap reveal">
+        <a class="flip-card" href="tarea4.html" target="_blank" rel="noopener noreferrer">
+          <div class="card-face card-front">
+            <h3>Tarea 4</h3>
+            <p>Integración final</p>
+          </div>
+          <div class="card-face card-back">
+            <h4>Resumen</h4>
+            <p>Entrega integral del flujo de trabajo, conclusiones y mejoras aplicadas para una solución más robusta.</p>
+          </div>
+        </a>
+      </article>
+
+    </div>
+  </section>
+
+  <footer>
+    © 2026 · Portafolio Data
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach(card => observer.observe(card));
+  </script>
+
+</body>
 </html>
