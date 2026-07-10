@@ -1,21 +1,26 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portafolio Data</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portafolio-Lizbeth</title>
   <style>
+    
+    /* VARIABLES DE COLOR Y BASE  */
     :root{
-      --bg-overlay: rgba(10, 14, 22, 0.72);
-      --card-front: #1f2937;
-      --card-back: #374151;
-      --text-main: #f3f4f6;
-      --text-soft: #d1d5db;
-      --accent: #60a5fa;
-      --shadow: 0 12px 30px rgba(0,0,0,.35);
+      --rosa: #f8d7e8;
+      --lavanda: #e6ddff;
+      --azul: #d9ecff;
+      --beige: #f8f2e7;
+      --texto: #3c3550;
+      --texto-sec: #6f6787;
+      --blanco: #ffffff;
+      --sombra: 0 10px 25px rgba(91, 74, 120, 0.12);
+      --sombra-soft: 0 6px 16px rgba(91, 74, 120, 0.08);
+      --radius: 18px;
+      --radius-sm: 12px;
+      --grad-hero: linear-gradient(135deg, #f8d7e8 0%, #e6ddff 45%, #d9ecff 100%);
+      --grad-btn: linear-gradient(135deg, #b69cff, #8fb9ff);
     }
 
     *{
@@ -24,255 +29,681 @@
       box-sizing:border-box;
     }
 
-    body{
-      font-family:'Inter', sans-serif;
-      color: var(--text-main);
-      background:
-        linear-gradient(var(--bg-overlay), var(--bg-overlay)),
-        url("https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=1600&q=80")
-        center/cover fixed no-repeat;
-      min-height: 100vh;
-      overflow-x: hidden;
+    html{
+      scroll-behavior:smooth;
     }
 
-    .hero{
-      min-height: 100vh;
+    body{
+      font-family: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
+      color: var(--texto);
+      background: linear-gradient(180deg, #fff 0%, #fcf9ff 100%);
+      line-height:1.6;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+      border-radius: var(--radius-sm);
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    .container{
+      width:min(1120px, 92%);
+      margin:0 auto;
+    }
+
+    /* HEADER FIJO */
+    header{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      z-index:1000;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(8px);
+      box-shadow: var(--sombra-soft);
+    }
+
+    .nav{
+      min-height:72px;
       display:flex;
       align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding: 2rem;
+      justify-content:space-between;
+      gap:1rem;
     }
 
-    .hero-content{
-      max-width: 900px;
-      backdrop-filter: blur(2px);
+    .brand{
+      font-weight:700;
+      font-size:1rem;
+      color:var(--texto);
+      letter-spacing:.2px;
     }
 
-    h1{
-      font-size: clamp(2.2rem, 6vw, 4.5rem);
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 1rem;
+    .menu{
+      display:flex;
+      gap:1rem;
+      flex-wrap:wrap;
     }
 
-    .subtitle{
-      color: var(--text-soft);
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      font-weight: 300;
-      margin-bottom: 1.5rem;
+    .menu a{
+      font-size:.92rem;
+      color:var(--texto-sec);
+      padding:.45rem .75rem;
+      border-radius:999px;
+      transition:.25s ease;
     }
 
-    .scroll-indicator{
+    .menu a:hover{
+      background: var(--lavanda);
+      color:var(--texto);
+      transform: translateY(-2px);
+    }
+
+    /* HERO */
+    .hero{
+      margin-top:92px;
+      padding:56px 0 32px;
+    }
+
+    .hero-card{
+      background:var(--grad-hero);
+      border-radius:28px;
+      box-shadow: var(--sombra);
+      padding:42px;
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:24px;
+      align-items:center;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero h1{
+      font-size:clamp(1.6rem, 3vw, 2.6rem);
+      line-height:1.2;
+      margin-bottom:12px;
+    }
+
+    .hero p{
+      color:var(--texto-sec);
+      max-width:62ch;
+      margin-bottom:22px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      background:var(--grad-btn);
+      color:#fff;
+      padding:.8rem 1.2rem;
+      border-radius:12px;
+      font-weight:600;
+      transition: .28s ease;
+      box-shadow: 0 10px 18px rgba(102, 102, 180, 0.25);
+    }
+
+    .btn:hover{
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 14px 22px rgba(102, 102, 180, 0.3);
+    }
+
+    .hero-ill{
+      background: rgba(255,255,255,0.55);
+      border-radius:20px;
+      padding:18px;
+      display:grid;
+      place-items:center;
+      min-height:220px;
+    }
+
+    .hero-ill span{
+      font-size:5rem;
+      animation: float 2.4s ease-in-out infinite;
       display:inline-block;
-      margin-top: .6rem;
-      color: var(--accent);
-      font-size: .95rem;
-      animation: float 1.8s ease-in-out infinite;
     }
 
-    @keyframes float{
-      0%,100%{ transform: translateY(0); opacity: .8; }
-      50%{ transform: translateY(6px); opacity: 1; }
+    /* SECCIONES GENERALES */
+    section{
+      padding:62px 0 18px;
     }
 
-    .section{
-      padding: 3rem 1.2rem 5rem;
-      max-width: 1200px;
-      margin: 0 auto;
+    .section-title{
+      font-size:1.5rem;
+      margin-bottom:8px;
     }
 
-    .section h2{
-      text-align:center;
-      margin-bottom: 2rem;
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      font-weight: 600;
+    .section-sub{
+      color:var(--texto-sec);
+      margin-bottom:24px;
     }
 
-    .cards-grid{
+    /* TAREAS - GRID DE CARDS */
+    .tasks-grid{
       display:grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
+      gap:18px;
     }
 
-    .card-wrap{
-      perspective: 1000px;
-      height: 280px;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all .8s ease;
-    }
-
-    .card-wrap.show{
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .flip-card{
+    .card{
+      background:var(--blanco);
+      border-radius:var(--radius);
+      box-shadow: var(--sombra-soft);
+      padding:18px;
+      border:1px solid #f0e9ff;
+      transition:.3s ease;
       position:relative;
+      overflow:hidden;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      top:0; left:0;
       width:100%;
-      height:100%;
-      transform-style: preserve-3d;
-      transition: transform .7s ease;
-      border-radius: 16px;
-      box-shadow: var(--shadow);
-      cursor: pointer;
-      text-decoration: none;
+      height:4px;
+      background: linear-gradient(90deg, #f8bfdc, #baa8ff, #9cc7ff);
+    }
+
+    .card:hover{
+      transform: translateY(-6px);
+      box-shadow: var(--sombra);
+    }
+
+    .card h3{
+      font-size:1.05rem;
+      margin-bottom:8px;
+    }
+
+    .card p{
+      color:var(--texto-sec);
+      font-size:.95rem;
+      margin-bottom:12px;
+    }
+
+    .meta{
+      font-size:.84rem;
+      color:#8a7da9;
+      margin-bottom:14px;
       display:block;
     }
 
-    .card-wrap:hover .flip-card{
-      transform: rotateY(180deg);
+    .btn-outline{
+      display:inline-block;
+      padding:.55rem .9rem;
+      border:1px solid #c4b3ff;
+      color:#6a57a8;
+      border-radius:10px;
+      font-weight:600;
+      transition:.25s ease;
+      background:#f9f6ff;
     }
 
-    .card-face{
+    .btn-outline:hover{
+      background:#ebe4ff;
+      transform: translateY(-2px);
+    }
+
+    /* EVIDENCIAS - GALERÍA */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap:16px;
+    }
+
+    .shot{
+      background:#fff;
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow: var(--sombra-soft);
+      position:relative;
+    }
+
+    .shot img{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      transition: transform .35s ease;
+    }
+
+    .shot:hover img{
+      transform: scale(1.08);
+    }
+
+    .overlay{
       position:absolute;
       inset:0;
-      border-radius:16px;
-      backface-visibility:hidden;
-      -webkit-backface-visibility:hidden;
+      background: linear-gradient(to top, rgba(32,22,56,.65), rgba(32,22,56,.1));
       display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      padding: 1.2rem;
+      align-items:flex-end;
+      padding:12px;
+      opacity:0;
+      transition:.3s ease;
     }
 
-    .card-front{
-      background: linear-gradient(160deg, #111827, var(--card-front));
-      border: 1px solid rgba(255,255,255,.08);
+    .shot:hover .overlay{
+      opacity:1;
     }
 
-    .card-front h3{
-      font-size: 1.35rem;
-      margin-bottom: .6rem;
-    }
-
-    .card-front p{
-      color: var(--text-soft);
-      font-size: .95rem;
-    }
-
-    .card-back{
-      background: linear-gradient(160deg, #1f2937, var(--card-back));
-      border: 1px solid rgba(255,255,255,.12);
-      transform: rotateY(180deg);
-      text-align:center;
-    }
-
-    .card-back h4{
-      margin-bottom: .6rem;
-      font-size: 1.1rem;
-      color: #e5e7eb;
-    }
-
-    .card-back p{
-      font-size: .94rem;
-      color: #d1d5db;
-      line-height: 1.45;
-    }
-
-    footer{
-      text-align:center;
-      padding: 1.2rem;
-      color: #cbd5e1;
-      font-size: .9rem;
-      border-top: 1px solid rgba(255,255,255,.08);
-      background: rgba(15, 23, 42, .35);
+    .overlay a{
+      color:#fff;
+      background: rgba(255,255,255,.2);
+      border:1px solid rgba(255,255,255,.5);
+      padding:.45rem .7rem;
+      border-radius:9px;
+      font-size:.86rem;
       backdrop-filter: blur(2px);
+    }
+
+    /* RECURSOS - LISTA ELEGANTE */
+    .resources{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .resource{
+      background:#fff;
+      border:1px solid #eee4ff;
+      box-shadow: var(--sombra-soft);
+      border-radius:14px;
+      padding:14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      transition:.25s ease;
+    }
+
+    .resource:hover{
+      transform: translateY(-3px);
+    }
+
+    .resource .info{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+
+    .icon-doc{
+      font-size:1.4rem;
+      animation: pulse 2.2s infinite;
+    }
+
+    .resource h4{
+      margin-bottom:2px;
+      font-size:1rem;
+    }
+
+    .resource p{
+      color:var(--texto-sec);
+      font-size:.9rem;
+    }
+
+    /* PROYECTO FINAL - HIGHLIGHT */
+    .final-project{
+      background: linear-gradient(135deg, #fff8fb 0%, #f3edff 55%, #e8f3ff 100%);
+      border:1px solid #eadfff;
+      border-radius:24px;
+      padding:30px;
+      box-shadow: var(--sombra);
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      align-items:center;
+    }
+
+    .tech-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin:14px 0 18px;
+    }
+
+    .chip{
+      background:#fff;
+      border:1px solid #dfd3ff;
+      color:#6a57a8;
+      padding:.35rem .65rem;
+      border-radius:999px;
+      font-size:.82rem;
+      font-weight:600;
+    }
+
+    .project-emoji{
+      font-size:4.2rem;
+      text-align:center;
+      animation: float 2.4s ease-in-out infinite;
+    }
+
+    /* SOBRE LA MATERIA */
+    .about{
+      background:#fff;
+      border:1px solid #f0e8ff;
+      border-radius:16px;
+      box-shadow: var(--sombra-soft);
+      padding:22px;
+    }
+
+    .about p{
+      color:var(--texto-sec);
+    }
+
+    /* FOOTER */
+    footer{
+      margin-top:48px;
+      background:#f6efff;
+      border-top:1px solid #e7dcff;
+      padding:26px 0;
+      color:#6d6390;
+    }
+
+    .foot{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      font-size:.92rem;
+    }
+
+    .foot a{
+      color:#5d4a96;
+      font-weight:600;
+    }
+
+    /* ANIMACIONES */
+    @keyframes fadeUp{
+      from{opacity:0; transform: translateY(18px);}
+      to{opacity:1; transform: translateY(0);}
+    }
+
+    @keyframes float{
+      0%,100%{transform: translateY(0);}
+      50%{transform: translateY(-8px);}
+    }
+
+    @keyframes pulse{
+      0%,100%{transform: scale(1);}
+      50%{transform: scale(1.08);}
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px){
+      .hero-card,
+      .final-project{
+        grid-template-columns:1fr;
+      }
+
+      .hero-ill{
+        min-height:160px;
+      }
+
+      .resources{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 640px){
+      .nav{
+        align-items:flex-start;
+        padding:12px 0;
+      }
+      .menu{
+        gap:.4rem;
+      }
+      .menu a{
+        font-size:.82rem;
+      }
+      .hero{
+        margin-top:108px;
+      }
+      .hero-card{
+        padding:26px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <header class="hero">
-    <div class="hero-content">
-      <h1>Portafolio Data</h1>
-      <p class="subtitle">Explora mis entregas y proyectos con enfoque en análisis de datos y desarrollo en la nube.</p>
-      <span class="scroll-indicator">Desliza hacia abajo ↓</span>
+  <!-- HEADER FIJO CON NAVEGACIÓN -->
+  <header>
+    <div class="container nav">
+      <div class="brand">Portafolio de Tareas - Monica Lizbeth.</div>
+      <nav class="menu">
+        <a href="#inicio">Inicio</a>
+        <a href="#tareas">Tareas</a>
+        <a href="#evidencias">Evidencias</a>
+        <a href="#recursos">Recursos</a>
+        <a href="#proyecto-final">Proyecto Final</a>
+      </nav>
     </div>
   </header>
 
-  <section class="section">
-    <h2>Ejercicios...</h2>
-    <div class="cards-grid">
-
-      <article class="card-wrap reveal">
-        <a class="flip-card" href="https://lizbeth-mcode.github.io/Portafolio_ZV/Tarea1.html" target="_blank" rel="noopener noreferrer">
-          <div class="card-face card-front">
-            <h3>Tarea 1</h3>
-            <p>Introducción y fundamentos</p>
-          </div>
-          <div class="card-face card-back">
-            <h4>Resumen</h4>
-            <p>Primera práctica con conceptos base del entorno, flujo de trabajo y estructura inicial del proyecto.</p>
-          </div>
+  <!-- HERO / BIENVENIDA -->
+  <main id="inicio" class="hero">
+    <div class="container hero-card">
+      <div>
+        <h1>Repositorio de actividades académicas</h1>
+        <p>
+          Bienvenido(a) a mi portal personal de la materia. Aquí encontrarás tareas,
+          evidencias visuales, recursos en PDF y el proyecto final, organizados por secciones
+          para facilitar la revisión docente.
+        </p>
+        <a class="btn" href="https://github.com/Lizbeth-MCode" target="_blank" rel="noopener">
+          Ver GitHub
         </a>
-      </article>
+      </div>
+      <div class="hero-ill">
+        <span title="Estudio">👩‍💻📚</span>
+      </div>
+    </div>
+  </main>
 
-      <article class="card-wrap reveal">
-        <a class="flip-card" href="https://lizbeth-mcode.github.io/Portafolio_ZV/Clase_Pandas_MonicaLizbeth.html" target="_blank" rel="noopener noreferrer">
-          <div class="card-face card-front">
-            <h3>Tarea 2</h3>
-            <p>Procesamiento de datos</p>
-          </div>
-          <div class="card-face card-back">
-            <h4>Resumen</h4>
-            <p>Limpieza y transformación de datos, aplicando buenas prácticas para preparar información útil y consistente.</p>
-          </div>
-        </a>
-      </article>
+  <!-- SECCIÓN TAREAS -->
+  <section id="tareas">
+    <div class="container">
+      <h2 class="section-title">Tareas</h2>
+      <p class="section-sub">Actividades realizadas durante la materia</p>
 
-      <article class="card-wrap reveal">
-        <a class="flip-card" href="https://lizbeth-mcode.github.io/Portafolio_ZV/Captura_Actividad_clase.png" target="_blank" rel="noopener noreferrer">
-          <div class="card-face card-front">
-            <h3>Tarea 3</h3>
-            <p>Visualización (imagen)</p>
-          </div>
-          <div class="card-face card-back">
-            <h4>Resumen</h4>
-            <p>Captura de la actividad en clases: leer datos con boto3 y visualizacion en streamlite</p>
-          </div>
-        </a>
-      </article>
+      <div class="tasks-grid">
+        <article class="card">
+          <h3>Tarea 1: Introducción a Python</h3>
+          <p>Resumen inicial de conceptos base, estructura del Jupyter-notebook.</p>
+          <span class="meta">Fecha: 02/07/2026</span>
+          <a class="btn-outline" href="https://lizbeth-mcode.github.io/Portafolio_ZV/Tarea1.html" target="_blank" rel="noopener">Ver archivo</a>
+        </article>
 
-      <article class="card-wrap reveal">
-        <a class="flip-card" href="https://github.com/Lizbeth-MCode/Portafolio_ZV/tree/main/Evidencias_cursos" target="_blank" rel="noopener noreferrer">
-                                   
-          <div class="card-face card-front">
-            <h3>Cursos</h3>
-            <p>Visualización de cursos terminados pdf</p>
-          </div>
-          <div class="card-face card-back">
-            <h4>Resumen</h4>
-            <p>Captura de los cursos asignados</p>
-          </div>
-        </a>
-      </article>
+        <article class="card">
+          <h3>Tarea 2: Pandas</h3>
+          <p>Mini-practica para la exploracion de pandas, numpys y dataframe</p>
+          <span class="meta">Fecha: 03/07/2026</span>
+          <a class="btn-outline" href="https://lizbeth-mcode.github.io/Portafolio_ZV/Clase_Pandas_MonicaLizbeth.html" target="_blank" rel="noopener">Ver archivo</a>
+        </article>
 
+        <article class="card">
+          <h3>N/A</h3>
+          <p>----------------------------------------------------------.</p>
+          <span class="meta">Fecha: -/-/-</span>
+          <a class="btn-outline" href="" target="_blank" rel="noopener">Ver archivo</a>
+        </article>
 
-
+        <article class="card">
+          <h3>N/A</h3>
+          <p>-----------------------------------------------------------.</p>
+          <span class="meta">Fecha: -/-/-</span>
+          <a class="btn-outline" href="https://github.com/Lizbeth-MCode/mi-materia/blob/main/tareas/tarea4.pdf" target="_blank" rel="noopener">Ver archivo</a>
+        </article>
+      </div>
     </div>
   </section>
 
+  <!-- =======================================================
+       SECCIÓN EVIDENCIAS (CAPTURAS)
+       ======================================================= -->
+  <section id="evidencias">
+    <div class="container">
+      <h2 class="section-title">Evidencias</h2>
+      <p class="section-sub">Galería de capturas que respaldan el desarrollo de actividades y avances del curso.</p>
+
+      <div class="gallery">
+        <figure class="shot">
+          <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1200&auto=format&fit=crop" alt="Evidencia 1">
+          <figcaption class="overlay">
+            <a href="https://github.com/Lizbeth-MCode/mi-materia/blob/main/evidencias/evidencia1.png" target="_blank" rel="noopener">Ver imagen completa</a>
+          </figcaption>
+        </figure>
+
+        <figure class="shot">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop" alt="Evidencia 2">
+          <figcaption class="overlay">
+            <a href="https://github.com/Lizbeth-MCode/mi-materia/blob/main/evidencias/evidencia2.png" target="_blank" rel="noopener">Ver imagen completa</a>
+          </figcaption>
+        </figure>
+
+        <figure class="shot">
+          <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1200&auto=format&fit=crop" alt="Evidencia 3">
+          <figcaption class="overlay">
+            <a href="https://github.com/Lizbeth-MCode/mi-materia/blob/main/evidencias/evidencia3.png" target="_blank" rel="noopener">Ver imagen completa</a>
+          </figcaption>
+        </figure>
+
+        <figure class="shot">
+          <img src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?q=80&w=1200&auto=format&fit=crop" alt="Evidencia 4">
+          <figcaption class="overlay">
+            <a href="https://github.com/Lizbeth-MCode/mi-materia/blob/main/evidencias/evidencia4.png" target="_blank" rel="noopener">Ver imagen completa</a>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================
+       SECCIÓN RECURSOS / CURSOS
+       ======================================================= -->
+  <section id="recursos">
+    <div class="container">
+      <h2 class="section-title">Recursos y materiales</h2>
+      <p class="section-sub">Documentos complementarios para reforzar contenidos: PDFs, guías y apuntes.</p>
+
+      <div class="resources">
+        <article class="resource">
+          <div class="info">
+            <span class="icon-doc">📄</span>
+            <div>
+              <h4>Guía de estudio - Unidad 1</h4>
+              <p>Conceptos clave y ejercicios recomendados para repaso.</p>
+            </div>
+          </div>
+          <a class="btn-outline" href="https://github.com/Lizbeth-MCode/mi-materia/blob/main/recursos/guia-unidad1.pdf" target="_blank" rel="noopener">Abrir PDF</a>
+        </article>
+
+        <article class="resource">
+          <div class="info">
+            <span class="icon-doc">📘</span>
+            <div>
+              <h4>Apuntes de clase</h4>
+              <p>Resumen semanal con definiciones y ejemplos prácticos.</p>
+            </div>
+          </div>
+          <a class="btn-outline" href="https://github.com/Lizbeth-MCode/mi-materia/blob/main/recursos/apuntes.pdf" target="_blank" rel="noopener">Abrir PDF</a>
+        </article>
+
+        <article class="resource">
+          <div class="info">
+            <span class="icon-doc">📝</span>
+            <div>
+              <h4>Lectura complementaria</h4>
+              <p>Documento de análisis para profundizar los temas vistos.</p>
+            </div>
+          </div>
+          <a class="btn-outline" href="https://github.com/Lizbeth-MCode/mi-materia/blob/main/recursos/lectura-complementaria.pdf" target="_blank" rel="noopener">Abrir PDF</a>
+        </article>
+
+        <article class="resource">
+          <div class="info">
+            <span class="icon-doc">📚</span>
+            <div>
+              <h4>Manual de referencia rápida</h4>
+              <p>Material de consulta breve para actividades evaluadas.</p>
+            </div>
+          </div>
+          <a class="btn-outline" href="https://github.com/Lizbeth-MCode/mi-materia/blob/main/recursos/manual-referencia.pdf" target="_blank" rel="noopener">Abrir PDF</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================
+       SECCIÓN PROYECTO FINAL
+       ======================================================= -->
+  <section id="proyecto-final">
+    <div class="container">
+      <h2 class="section-title">Proyecto Final</h2>
+      <p class="section-sub">Entrega principal del curso, con integración de conocimientos y aplicación práctica.</p>
+
+      <article class="final-project">
+        <div>
+          <h3 style="font-size:1.35rem; margin-bottom:8px;">Sistema de organización académica personal</h3>
+          <p style="color:var(--texto-sec);">
+            Proyecto centrado en la organización de actividades académicas en una interfaz clara,
+            accesible y visualmente atractiva. Incluye estructura por módulos, evidencias,
+            recursos y documentación completa del proceso.
+          </p>
+
+          <div class="tech-list">
+            <span class="chip">HTML5</span>
+            <span class="chip">CSS3</span>
+            <span class="chip">Grid</span>
+            <span class="chip">Flexbox</span>
+            <span class="chip">Diseño Responsive</span>
+          </div>
+
+          <a class="btn" href="https://github.com/Lizbeth-MCode/mi-materia/tree/main/proyecto-final" target="_blank" rel="noopener">
+            Ver proyecto
+          </a>
+        </div>
+        <div class="project-emoji" title="Proyecto">💡💻</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- =======================================================
+       SECCIÓN SOBRE LA MATERIA
+       ======================================================= -->
+  <section id="materia">
+    <div class="container">
+      <h2 class="section-title">Sobre la materia</h2>
+      <div class="about">
+        <p>
+          Esta materia permitió desarrollar habilidades de análisis, organización de información
+          y presentación estructurada de evidencias académicas. Se reforzó la documentación técnica,
+          el trabajo por entregables y la comunicación visual de resultados.
+          <br><br>
+          <strong>Objetivo del curso:</strong> aplicar fundamentos teóricos en actividades prácticas,
+          promoviendo autonomía, pensamiento crítico y mejora continua.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================
+       FOOTER
+       ======================================================= -->
   <footer>
-    © 2026 · Portafolio Data
+    <div class="container foot">
+      <p><strong>Estudiante:</strong> Lizbeth M.</p>
+      <p>
+        GitHub:
+        <a href="https://github.com/Lizbeth-MCode" target="_blank" rel="noopener">
+          github.com/Lizbeth-MCode
+        </a>
+      </p>
+      <p>Gracias por revisar este portafolio académico ✨</p>
+    </div>
   </footer>
-
-  <script>
-    const reveals = document.querySelectorAll('.reveal');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-
-    reveals.forEach(card => observer.observe(card));
-  </script>
-
 </body>
 </html>
